@@ -6,6 +6,7 @@ namespace App\ConundrumSolver\Year2023;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 use App\Entity\Year2023\Day11\Position;
+use App\Service\MatrixHelper;
 
 // /// Day 11: Cosmic Expansion ///
 class Day11ConundrumSolver extends AbstractConundrumSolver
@@ -88,11 +89,11 @@ class Day11ConundrumSolver extends AbstractConundrumSolver
     {
         // Expand lines then rotate to expand columns
         $input = $this->doExpand($this->getInput());
-        $this->rotateMatrix($input);
+        MatrixHelper::rotateMatrix($input);
 
         // Expand columns then rotate back
         $input = $this->doExpand($input);
-        $this->rotateMatrix($input);
+        MatrixHelper::rotateMatrix($input);
 
         $this->universe = $input;
     }
@@ -120,14 +121,6 @@ class Day11ConundrumSolver extends AbstractConundrumSolver
         $unique = array_unique($values);
 
         return 1 === \count($unique) && '.' === $unique[0];
-    }
-
-    private function rotateMatrix(array &$matrix): void
-    {
-        // Effectively, this NULL callback loops through all the arrays in parallel taking each
-        // value from them in turn to build a new array:
-        // @see https://stackoverflow.com/a/30082922
-        $matrix = array_map(null, ...$matrix);
     }
 
     private function pinpointGalaxies(): void
