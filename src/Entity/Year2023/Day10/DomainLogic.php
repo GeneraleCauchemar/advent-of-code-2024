@@ -2,14 +2,18 @@
 
 namespace App\Entity\Year2023\Day10;
 
-use JMGQ\AStar\DomainLogicInterface;
+use App\Entity\PathFinding\AbstractDomainLogic;
+use App\Entity\PathFinding\AbstractTerrainCost;
+use App\Entity\PathFinding\TerrainCostInterface;
 
-class DomainLogic implements DomainLogicInterface
+class DomainLogic extends AbstractDomainLogic
 {
     private array $positions;
 
-    public function __construct(private readonly TerrainCost $terrainCost)
+    public function __construct(protected TerrainCostInterface $terrainCost)
     {
+        parent::__construct($this->terrainCost);
+
         $this->positions = $this->terrainCost->positions;
     }
 
@@ -34,17 +38,17 @@ class DomainLogic implements DomainLogicInterface
     }
 
     #[\Override]
-    public function calculateRealCost(mixed $node, mixed $adjacent): float | int
+    public function calculateRealCost(mixed $node, mixed $adjacent): float|int
     {
         if ($node->isAdjacentTo($adjacent)) {
             return $this->terrainCost->getCost($node, $adjacent);
         }
 
-        return TerrainCost::INFINITE;
+        return AbstractTerrainCost::INFINITE;
     }
 
     #[\Override]
-    public function calculateEstimatedCost(mixed $fromNode, mixed $toNode): float | int
+    public function calculateEstimatedCost(mixed $fromNode, mixed $toNode): float|int
     {
         if ($fromNode === $toNode) {
             return PHP_INT_MAX;
@@ -59,34 +63,5 @@ class DomainLogic implements DomainLogicInterface
         $columnFactor = ($a->column - $b->column) ** 2;
 
         return sqrt($rowFactor + $columnFactor);
-    }
-
-    private function calculateAdjacentBoundaries(Position $position): array
-    {
-        if ($position->row === 0) {
-            $startingRow = 0;
-        } else {
-            $startingRow = $position->row - 1;
-        }
-
-        if ($position->row === $this->terrainCost->getTotalRows() - 1) {
-            $endingRow = $position->row;
-        } else {
-            $endingRow = $position->row + 1;
-        }
-
-        if ($position->column === 0) {
-            $startingColumn = 0;
-        } else {
-            $startingColumn = $position->column - 1;
-        }
-
-        if ($position->column === $this->terrainCost->getTotalColumns() - 1) {
-            $endingColumn = $position->column;
-        } else {
-            $endingColumn = $position->column + 1;
-        }
-
-        return [$startingRow, $endingRow, $startingColumn, $endingColumn];
     }
 }

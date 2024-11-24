@@ -23,6 +23,7 @@ class Day11ConundrumSolver extends AbstractConundrumSolver
         parent::__construct($year, $day);
     }
 
+    #[\Override]
     public function warmup(): void
     {
         $this->mapBeforeExpansion();
@@ -35,6 +36,7 @@ class Day11ConundrumSolver extends AbstractConundrumSolver
     // PART 1
     ////////////////
 
+    #[\Override]
     public function partOne(): string|int
     {
         $sum = 0;
@@ -50,6 +52,7 @@ class Day11ConundrumSolver extends AbstractConundrumSolver
     // PART 2
     ////////////////
 
+    #[\Override]
     public function partTwo(): string|int
     {
         $sum = 0;
@@ -71,7 +74,7 @@ class Day11ConundrumSolver extends AbstractConundrumSolver
         $i = 1;
 
         foreach ($this->getInput() as $row => $line) {
-            $galaxies = array_filter(str_split($line), static fn(string $symbol): bool => '#' === $symbol);
+            $galaxies = array_filter(str_split((string) $line), static fn(string $symbol): bool => '#' === $symbol);
 
             foreach ($galaxies as $column => $galaxy) {
                 $this->galaxiesBeforeExpansion[$i] = new Position($row, $column, $i);

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Entity\Year2023;
+namespace App\Entity\PathFinding;
 
 use JMGQ\AStar\Node\NodeIdentifierInterface;
 
-abstract class AbstractPosition implements NodeIdentifierInterface, \Stringable
+abstract class AbstractPosition implements PositionInterface, NodeIdentifierInterface, \Stringable
 {
     public function __construct(public int $row, public int $column)
     {
@@ -16,12 +16,12 @@ abstract class AbstractPosition implements NodeIdentifierInterface, \Stringable
         return ((string) $this->row) . 'x' . ((string) $this->column);
     }
 
-    public function isEqualTo(AbstractPosition $position): bool
+    public function isEqualTo(PositionInterface $position): bool
     {
         return $this->row === $position->row && $this->column === $position->column;
     }
 
-    public function isAdjacentTo(AbstractPosition $position): bool
+    public function isAdjacentTo(PositionInterface $position): bool
     {
         $rowDiff = $this->getRowDiff($position, true);
         $columnDiff = $this->getColumnDiff($position, true);
@@ -29,12 +29,12 @@ abstract class AbstractPosition implements NodeIdentifierInterface, \Stringable
         return (1 === $rowDiff && 0 === $columnDiff) || (1 === $columnDiff && 0 === $rowDiff);
     }
 
-    private function getRowDiff(AbstractPosition $position, bool $absolute = false): int
+    protected function getRowDiff(PositionInterface $position, bool $absolute = false): int
     {
         return $absolute ? abs($this->row - $position->row) : $this->row - $position->row;
     }
 
-    private function getColumnDiff(AbstractPosition $position, bool $absolute = false): int
+    protected function getColumnDiff(PositionInterface $position, bool $absolute = false): int
     {
         return $absolute ? abs($this->column - $position->column) : $this->column - $position->column;
     }

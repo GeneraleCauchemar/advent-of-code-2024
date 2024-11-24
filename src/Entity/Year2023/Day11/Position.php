@@ -2,7 +2,7 @@
 
 namespace App\Entity\Year2023\Day11;
 
-use App\Entity\Year2023\AbstractPosition;
+use App\Entity\PathFinding\AbstractPosition;
 
 class Position extends AbstractPosition
 {

@@ -14,6 +14,7 @@ class Day12ConundrumSolver extends AbstractConundrumSolver
         parent::__construct($year, $day);
     }
 
+    #[\Override]
     public function warmup(): void
     {
         /**
@@ -22,7 +23,7 @@ class Day12ConundrumSolver extends AbstractConundrumSolver
          * I might go back and try to do it again later.
          */
         foreach ($this->getInput() as $line) {
-            [$damagedRecord, $wholeRecord] = explode(' ', $line);
+            [$damagedRecord, $wholeRecord] = explode(' ', (string) $line);
             $groups = array_map('\intval', explode(',', $wholeRecord));
 
             preg_match_all('/(\?+|#+|\.+)/', $damagedRecord, $matches, PREG_OFFSET_CAPTURE);
@@ -68,6 +69,7 @@ class Day12ConundrumSolver extends AbstractConundrumSolver
     // PART 1
     ////////////////
 
+    #[\Override]
     public function partOne(): string|int
     {
         return self::UNDETERMINED;
@@ -77,6 +79,7 @@ class Day12ConundrumSolver extends AbstractConundrumSolver
     // PART 2
     ////////////////
 
+    #[\Override]
     public function partTwo(): string|int
     {
         return self::UNDETERMINED;

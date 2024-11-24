@@ -83,6 +83,7 @@ class ResolveConundrumsCommand extends Command
 
             return Command::SUCCESS;
         } catch (\Exception $e) {
+            dd($e);
             $error = $e->getMessage();
             $banner = \sprintf(
                 '<error>%s</>',

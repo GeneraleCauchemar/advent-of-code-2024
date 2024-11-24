@@ -15,7 +15,8 @@
     "symfony/framework-bundle": "7.1.*",
     "symfony/http-kernel": "7.1.*",
     "symfony/runtime": "7.1.*",
-    "symfony/yaml": "7.1.*"
+    "symfony/yaml": "7.1.*",
+    "webmozart/assert": "*"
   },
   "config": {
     "allow-plugins": {

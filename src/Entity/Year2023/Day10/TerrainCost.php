@@ -2,14 +2,16 @@
 
 namespace App\Entity\Year2023\Day10;
 
-class TerrainCost
-{
-    public const INFINITE = PHP_INT_MAX;
+use App\Entity\PathFinding\AbstractTerrainCost;
 
+class TerrainCost extends AbstractTerrainCost
+{
     public function __construct(public array $positions)
     {
+        parent::__construct($this->positions);
     }
 
+    #[\Override]
     public function getCost(Position $from, Position $to): int
     {
         if ($to->isGround || $to->isStartingPoint || !$to->isOrientedTowards($from)) {
@@ -17,15 +19,5 @@ class TerrainCost
         }
 
         return 0;
-    }
-
-    public function getTotalRows(): int
-    {
-        return count($this->positions);
-    }
-
-    public function getTotalColumns(): int
-    {
-        return count($this->positions[0]);
     }
 }
