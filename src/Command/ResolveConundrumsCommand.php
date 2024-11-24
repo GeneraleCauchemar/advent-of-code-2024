@@ -83,11 +83,15 @@ class ResolveConundrumsCommand extends Command
 
             return Command::SUCCESS;
         } catch (\Exception $e) {
-            dd($e);
-            $error = $e->getMessage();
+            $error = \sprintf(
+                '%s [%s, l. %s]',
+                $e->getMessage(),
+                $e->getFile(),
+                $e->getLine()
+            );
             $banner = \sprintf(
                 '<error>%s</>',
-                str_repeat(' ', Helper::width(Helper::removeDecoration($io->getFormatter(), $error)))
+                str_repeat(' ', Helper::width(Helper::removeDecoration($io->getFormatter(), $error))),
             );
 
             $io->text([
@@ -116,7 +120,7 @@ class ResolveConundrumsCommand extends Command
         return class_exists($className) ?
             new $className($this->year, $day) :
             throw new SolverNotFoundException(
-                \sprintf('<error>There is no solver available for day %s of %s!</error>', $this->day, $this->year)
+                \sprintf('There is no solver available for day %s of %s!', $this->day, $this->year)
             );
     }
 
