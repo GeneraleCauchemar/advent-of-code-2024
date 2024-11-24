@@ -97,7 +97,7 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
 
         if (!file_exists($path)) {
             throw new InputFileNotFoundException(
-                \sprintf('<error>Missing input file at path "%s".</error>', $path)
+                \sprintf('Missing input file at path "%s".', $path)
             );
         }
 
@@ -131,7 +131,7 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
         }
 
         if (empty($this->testInputs)) {
-            throw new InputFileNotFoundException('<error>Missing input file(s) for testing.</error>');
+            throw new InputFileNotFoundException('Missing input file(s) for testing.');
         }
     }
 

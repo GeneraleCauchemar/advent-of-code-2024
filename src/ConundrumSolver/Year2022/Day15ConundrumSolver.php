@@ -18,7 +18,7 @@ class Day15ConundrumSolver extends AbstractConundrumSolver
 
     public function partOne(): string|int
     {
-        return $this->findOccupiedSpotsForY(2000000);
+        return $this->findOccupiedSpotsForY($this->isTestMode() ? 10 : 2000000);
     }
 
     ////////////////
@@ -27,7 +27,7 @@ class Day15ConundrumSolver extends AbstractConundrumSolver
 
     public function partTwo(): string|int
     {
-        return '';
+        return self::UNDETERMINED;
     }
 
     ////////////////
