@@ -20,9 +20,9 @@ class Day08ConundrumSolver extends AbstractConundrumSolver
 
     private array $grid = [];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2022', '08');
     }
 
     #[\Override]

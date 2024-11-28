@@ -19,9 +19,9 @@ class Day09ConundrumSolver extends AbstractConundrumSolver
     private array $visited = [self::PART_ONE => [], self::PART_TWO => []];
     private array $positions = [];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2022', '09');
     }
 
     ////////////////

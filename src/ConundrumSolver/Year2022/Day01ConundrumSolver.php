@@ -12,9 +12,9 @@ class Day01ConundrumSolver extends AbstractConundrumSolver
 {
     private array $caloriesPerElf = [];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day, PHP_EOL . PHP_EOL);
+        parent::__construct('2022', '01', PHP_EOL . PHP_EOL);
     }
 
     ////////////////

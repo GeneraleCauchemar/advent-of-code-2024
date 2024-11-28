@@ -12,6 +12,11 @@ class Day13ConundrumSolver extends AbstractConundrumSolver
 {
     private const array DIVIDERS = [[[2]], [[6]]];
 
+    public function __construct()
+    {
+        parent::__construct('2022', '13');
+    }
+
     ////////////////
     // PART 1
     ////////////////

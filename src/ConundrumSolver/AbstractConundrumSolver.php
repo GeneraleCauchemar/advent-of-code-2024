@@ -17,11 +17,16 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
     private array $testInputs;
 
     public function __construct(
-        private readonly string $year,
-        private readonly string $day,
+        protected readonly string $year,
+        protected readonly string $day,
         private readonly ?string $separator = PHP_EOL,
         private readonly bool $keepAsString = false,
     ) {
+    }
+
+    public function supports(string $year, string $day): bool
+    {
+        return $this->year === $year && $this->day === $day;
     }
 
     /**

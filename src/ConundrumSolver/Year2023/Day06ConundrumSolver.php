@@ -12,9 +12,9 @@ class Day06ConundrumSolver extends AbstractConundrumSolver
     private array $winningCombinationsArray = [];
     private int $winningCombinations = 0;
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day, keepAsString: true);
+        parent::__construct('2023', '06', keepAsString: true);
     }
 
     #[\Override]

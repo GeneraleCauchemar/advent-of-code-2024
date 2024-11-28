@@ -14,9 +14,9 @@ class Day13ConundrumSolver extends AbstractConundrumSolver
     private int $columnsToTheLeft;
     private array $partOneSymetryAxis = [];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day, PHP_EOL . PHP_EOL);
+        parent::__construct('2023', '13', PHP_EOL . PHP_EOL);
     }
 
     #[\Override]

@@ -38,9 +38,9 @@ class Day02ConundrumSolver extends AbstractConundrumSolver
         'Z' => self::WIN,
     ];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2022', '02');
     }
 
     ////////////////

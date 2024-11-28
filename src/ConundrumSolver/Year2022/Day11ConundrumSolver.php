@@ -17,9 +17,9 @@ class Day11ConundrumSolver extends AbstractConundrumSolver
     private array $monkeys;
     private int $supermodulo;
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day, 'Monkey ');
+        parent::__construct('2022', '11', 'Monkey ');
     }
 
     ////////////////

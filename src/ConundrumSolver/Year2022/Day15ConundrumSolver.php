@@ -12,6 +12,11 @@ class Day15ConundrumSolver extends AbstractConundrumSolver
     private array $sensors = [];
     private array $beacons = [];
 
+    public function __construct()
+    {
+        parent::__construct('2022', '15');
+    }
+
     ////////////////
     // PART 1
     ////////////////

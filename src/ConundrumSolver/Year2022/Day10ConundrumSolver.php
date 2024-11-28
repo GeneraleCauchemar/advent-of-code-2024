@@ -20,9 +20,9 @@ class Day10ConundrumSolver extends AbstractConundrumSolver
     private int $cycle = 0;
     private array $xRegisterValueForCycle = [0 => 1];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2022', '10');
     }
 
     ////////////////

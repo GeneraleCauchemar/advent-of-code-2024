@@ -22,9 +22,9 @@ class Day12ConundrumSolver extends AbstractConundrumSolver
     private Position $end;
     private array $positions = [];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2022', '12');
     }
 
     #[\Override]

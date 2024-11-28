@@ -10,9 +10,9 @@ use App\ConundrumSolver\AbstractConundrumSolver;
 // PART ONE: 7701, PART TWO: 2644
 class Day03ConundrumSolver extends AbstractConundrumSolver
 {
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2022', '03');
     }
 
     ////////////////

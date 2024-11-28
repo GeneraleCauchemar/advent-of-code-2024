@@ -6,6 +6,7 @@ namespace App\Command;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 use App\ConundrumSolver\ConundrumSolverInterface;
+use App\ConundrumSolver\SolverHandler;
 use App\Exception\SolverNotFoundException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -23,7 +24,7 @@ class ResolveConundrumsCommand extends Command
     private string $day;
     private bool $testMode;
 
-    public function __construct()
+    public function __construct(private readonly SolverHandler $solverHandler)
     {
         parent::__construct();
     }
@@ -110,18 +111,7 @@ class ResolveConundrumsCommand extends Command
      */
     private function getSolverForDate(): ConundrumSolverInterface
     {
-        $day = $this->getDay($this->day);
-        $className = \sprintf(
-            'App\\ConundrumSolver\\%s\\Day%sConundrumSolver',
-            'Year' . $this->year,
-            $day
-        );
-
-        return class_exists($className) ?
-            new $className($this->year, $day) :
-            throw new SolverNotFoundException(
-                \sprintf('There is no solver available for day %s of %s!', $this->day, $this->year)
-            );
+        return $this->solverHandler->getSolverForDate($this->year, $this->getDay($this->day));
     }
 
     private function getDay(string $day): string

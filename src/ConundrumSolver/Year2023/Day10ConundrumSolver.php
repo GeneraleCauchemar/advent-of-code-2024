@@ -17,9 +17,9 @@ class Day10ConundrumSolver extends AbstractConundrumSolver
     private array $positions = [];
     private array $loop = [];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2023', '10');
     }
 
     #[\Override]

@@ -13,9 +13,9 @@ class Day04ConundrumSolver extends AbstractConundrumSolver
     private array $pointsForWinningCards = [];
     private array $cards = [];
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2023', '04');
     }
 
     #[\Override]

@@ -60,9 +60,9 @@ class Day07ConundrumSolver extends AbstractConundrumSolver
     private array $types = [];
     private int $i = 0;
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2023', '07');
     }
 
     #[\Override]

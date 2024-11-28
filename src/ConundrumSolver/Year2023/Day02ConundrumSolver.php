@@ -21,9 +21,9 @@ class Day02ConundrumSolver extends AbstractConundrumSolver
     private array $validGames = [];
     private int $powerSum = 0;
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2023', '02');
     }
 
     #[\Override]

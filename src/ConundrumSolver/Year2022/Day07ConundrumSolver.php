@@ -24,9 +24,9 @@ class Day07ConundrumSolver extends AbstractConundrumSolver
 
     private int $totalWeight = 0;
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2022', '07');
     }
 
     #[\Override]

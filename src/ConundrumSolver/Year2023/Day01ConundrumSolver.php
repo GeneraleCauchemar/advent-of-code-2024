@@ -23,9 +23,9 @@ class Day01ConundrumSolver extends AbstractConundrumSolver
 
     private int $sum;
 
-    public function __construct(string $year, string $day)
+    public function __construct()
     {
-        parent::__construct($year, $day);
+        parent::__construct('2023', '01');
     }
 
     ////////////////

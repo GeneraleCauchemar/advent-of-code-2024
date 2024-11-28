@@ -16,6 +16,11 @@ class Day14ConundrumSolver extends AbstractConundrumSolver
     private array $rockStructures = [];
     private int $sandUnits;
 
+    public function __construct()
+    {
+        parent::__construct('2022', '14');
+    }
+
     ////////////////
     // PART 1
     ////////////////
