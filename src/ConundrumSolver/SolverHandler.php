@@ -18,6 +18,7 @@ readonly class SolverHandler
      */
     public function getSolverForDate(string $year, string $day): ConundrumSolverInterface
     {
+        /** @var ConundrumSolverInterface $solver */
         foreach ($this->conundrumSolvers as $solver) {
             if ($solver->supports($year, $day)) {
                 return $solver;

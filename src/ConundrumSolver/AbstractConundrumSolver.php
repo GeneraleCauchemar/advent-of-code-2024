@@ -17,8 +17,8 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
     private array $testInputs;
 
     public function __construct(
-        protected readonly string $year,
-        protected readonly string $day,
+        protected readonly string $year = '',
+        protected readonly string $day = '',
         private readonly ?string $separator = PHP_EOL,
         private readonly bool $keepAsString = false,
     ) {
