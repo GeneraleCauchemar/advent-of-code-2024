@@ -15,7 +15,7 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
     private bool $testMode = false;
     private array|string $input;
     private array $testInputs;
-    protected array $executionTimes = [];
+    protected ?float $executionTime = null;
 
     public function __construct(
         protected readonly string $year = '',
@@ -39,11 +39,16 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
         $this->testMode = $testMode;
 
         $this->init();
+
+        if (!$testMode) {
+            return $this->trackAndSolve();
+        }
+
         $this->warmup();
 
         return [
-            $testMode ? $this->partOne() : $this->trackAndSolve(),
-            $testMode ? $this->partTwo() : $this->trackAndSolve(self::PART_TWO),
+            $this->partOne(),
+            $this->partTwo(),
         ];
     }
 
@@ -63,15 +68,11 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
         return self::UNDETERMINED;
     }
 
-    public function getExecutionTimes(): array
+    public function getExecutionTime(): ?string
     {
-        array_walk($this->executionTimes, static function (&$time) {
-            $time = null !== $time
-                ? (number_format($time, 6) . 's')
-                : null;
-        });
-
-        return $this->executionTimes;
+        return null !== $this->executionTime
+            ? (number_format($this->executionTime, 6) . 's')
+            : null;
     }
 
     protected function isTestMode(): bool
@@ -175,12 +176,18 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
         );
     }
 
-    private function trackAndSolve(int $part = self::PART_ONE): int|string
+    private function trackAndSolve(): array
     {
+        $this->warmup();
+
         $startTime = microtime(true);
-        $result = self::PART_ONE === $part ? $this->partOne() : $this->partTwo();
+        $result = [
+            $this->partOne(),
+            $this->partTwo(),
+        ];
         $endTime = microtime(true);
-        $this->executionTimes[$part] = $endTime - $startTime;
+
+        $this->executionTime = $endTime - $startTime;
 
         return $result;
     }

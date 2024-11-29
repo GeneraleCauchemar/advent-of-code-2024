@@ -85,8 +85,8 @@ class ResolveConundrumsCommand extends Command
 
             if (!$this->testMode) {
                 $io->table(
-                    ['Part one', 'Part two'],
-                    [$conundrumSolver->getExecutionTimes()]
+                    ['Execution time'],
+                    [[$conundrumSolver->getExecutionTime()]]
                 );
             }
 

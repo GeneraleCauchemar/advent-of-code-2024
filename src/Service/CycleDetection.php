@@ -7,6 +7,8 @@ use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @see https://en.wikipedia.org/wiki/Cycle_detection
+ * @see https://rosettacode.org/wiki/Cycle_detection
+ * @see https://www.geeksforgeeks.org/brents-cycle-detection-algorithm/
  */
 class CycleDetection
 {
