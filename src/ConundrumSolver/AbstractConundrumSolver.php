@@ -15,6 +15,7 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
     private bool $testMode = false;
     private array|string $input;
     private array $testInputs;
+    protected array $executionTimes = [];
 
     public function __construct(
         protected readonly string $year = '',
@@ -41,8 +42,8 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
         $this->warmup();
 
         return [
-            $this->partOne(),
-            $this->partTwo(),
+            $testMode ? $this->partOne() : $this->trackAndSolve(),
+            $testMode ? $this->partTwo() : $this->trackAndSolve(self::PART_TWO),
         ];
     }
 
@@ -60,6 +61,17 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
     public function partTwo(): string|int
     {
         return self::UNDETERMINED;
+    }
+
+    public function getExecutionTimes(): array
+    {
+        array_walk($this->executionTimes, static function (&$time) {
+            $time = null !== $time
+                ? (number_format($time, 6) . 's')
+                : null;
+        });
+
+        return $this->executionTimes;
     }
 
     protected function isTestMode(): bool
@@ -161,5 +173,15 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
             $format,
             ...$values
         );
+    }
+
+    private function trackAndSolve(int $part = self::PART_ONE): int|string
+    {
+        $startTime = microtime(true);
+        $result = self::PART_ONE === $part ? $this->partOne() : $this->partTwo();
+        $endTime = microtime(true);
+        $this->executionTimes[$part] = $endTime - $startTime;
+
+        return $result;
     }
 }

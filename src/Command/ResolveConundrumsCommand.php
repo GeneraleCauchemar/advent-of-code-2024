@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace App\Command;
 
+use App\Console\ChristmasStyle;
+use App\Console\ChristmasTestStyle;
 use App\ConundrumSolver\AbstractConundrumSolver;
 use App\ConundrumSolver\ConundrumSolverInterface;
 use App\ConundrumSolver\SolverHandler;
 use App\Exception\SolverNotFoundException;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Console\Style\StyleInterface;
 
 #[AsCommand(name: 'app:resolve-conundrums')]
 class ResolveConundrumsCommand extends Command
@@ -63,14 +64,14 @@ class ResolveConundrumsCommand extends Command
 
             $io->text([
                 \sprintf(
-                    '<christmas_red%s>%s</>',
-                    $this->testMode ? '_test' : '',
+                    '<christmas_red>%s</>',
                     str_pad(
                         strtoupper(
                             \sprintf(
-                                '%s December %s, 2023 ',
+                                '%s December %s, %s ',
                                 $this->testMode ? ' // TEST //' : '',
                                 $this->day,
+                                $this->year
                             )
                         ),
                         Helper::width(Helper::removeDecoration($io->getFormatter(), $result)),
@@ -81,6 +82,13 @@ class ResolveConundrumsCommand extends Command
                 $banner,
                 '',
             ]);
+
+            if (!$this->testMode) {
+                $io->table(
+                    ['Part one', 'Part two'],
+                    [$conundrumSolver->getExecutionTimes()]
+                );
+            }
 
             return Command::SUCCESS;
         } catch (\Exception $e) {
@@ -123,10 +131,10 @@ class ResolveConundrumsCommand extends Command
     {
         $line = explode('|', ' Solution | to | part | one | is | %s | and | solution | to | part | two | is | %s |.');
 
-        array_walk($line, function (&$word, $key): void {
+        array_walk($line, static function (&$word, $key): void {
             $color = match (true) {
-                str_contains($word, '%s') => 'green' . ($this->testMode ? '_test' : ''),
-                !($key & 1) => 'red' . ($this->testMode ? '_test' : ''),
+                str_contains($word, '%s') => 'green',
+                !($key & 1) => 'red',
                 default => 'white',
             };
 
@@ -136,21 +144,10 @@ class ResolveConundrumsCommand extends Command
         return '<christmas_white> 🎄 </>' . \sprintf(implode('', $line), ...$result) . '<christmas_white> 🎄 </>';
     }
 
-    private function getIo(InputInterface $input, OutputInterface $output): SymfonyStyle
+    private function getIo(InputInterface $input, OutputInterface $output): StyleInterface
     {
-        $io = new SymfonyStyle($input, $output);
-        $styles = [
-            'christmas_red'        => new OutputFormatterStyle(null, '#ff0000'),
-            'christmas_white'      => new OutputFormatterStyle('black', '#fff'),
-            'christmas_green'      => new OutputFormatterStyle(null, '#009930'),
-            'christmas_red_test'   => new OutputFormatterStyle(null, 'bright-blue'),
-            'christmas_green_test' => new OutputFormatterStyle(null, 'bright-yellow'),
-        ];
-
-        foreach ($styles as $name => $style) {
-            $io->getFormatter()->setStyle($name, $style);
-        }
-
-        return $io;
+        return $this->testMode
+            ? new ChristmasTestStyle($input, $output)
+            : new ChristmasStyle($input, $output);
     }
 }
