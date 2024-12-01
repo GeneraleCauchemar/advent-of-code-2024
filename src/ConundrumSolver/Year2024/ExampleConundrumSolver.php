@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace App\ConundrumSolver\Year2023;
+namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// /// Day x: ... ///
+// /// Day 1: Historian Hysteria ///
 abstract class ExampleConundrumSolver extends AbstractConundrumSolver
 {
     public function __construct()
     {
-        parent::__construct('2023', '');
+        parent::__construct('2024', '');
     }
 
     ////////////////
