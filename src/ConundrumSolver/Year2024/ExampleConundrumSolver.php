@@ -6,7 +6,7 @@ namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// /// Day 1: Historian Hysteria ///
+// /// Day x: ... ///
 abstract class ExampleConundrumSolver extends AbstractConundrumSolver
 {
     public function __construct()
