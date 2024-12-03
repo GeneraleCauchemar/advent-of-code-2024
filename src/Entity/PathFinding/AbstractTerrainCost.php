@@ -2,12 +2,8 @@
 
 namespace App\Entity\PathFinding;
 
-use App\Entity\Year2023\Day10\Position;
-
 abstract class AbstractTerrainCost implements TerrainCostInterface
 {
-    public const int INFINITE = PHP_INT_MAX;
-
     public function __construct(public array $positions)
     {
     }
@@ -22,7 +18,7 @@ abstract class AbstractTerrainCost implements TerrainCostInterface
         return \count($this->positions[0]);
     }
 
-    public function getCost(Position $from, Position $to): int
+    public function getCost(PositionInterface $from, PositionInterface $to): int
     {
         return 0;
     }

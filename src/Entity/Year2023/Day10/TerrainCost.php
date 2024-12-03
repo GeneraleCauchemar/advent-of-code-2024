@@ -3,6 +3,7 @@
 namespace App\Entity\Year2023\Day10;
 
 use App\Entity\PathFinding\AbstractTerrainCost;
+use App\Entity\PathFinding\PositionInterface;
 
 class TerrainCost extends AbstractTerrainCost
 {
@@ -11,13 +12,10 @@ class TerrainCost extends AbstractTerrainCost
         parent::__construct($this->positions);
     }
 
-    #[\Override]
-    public function getCost(Position $from, Position $to): int
+    public function canMoveTo(PositionInterface $from, PositionInterface $to): bool
     {
-        if ($to->isGround || $to->isStartingPoint || !$to->isOrientedTowards($from)) {
-            return self::INFINITE;
-        }
-
-        return 0;
+        /** @var Position $to */
+        /** @var Position $from */
+        return !$to->isGround && !$to->isStartingPoint && $to->isOrientedTowards($from);
     }
 }
