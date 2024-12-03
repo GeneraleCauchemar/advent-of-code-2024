@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- PHP 8.3
+- PHP 8.4
 
 ## How to install
 
