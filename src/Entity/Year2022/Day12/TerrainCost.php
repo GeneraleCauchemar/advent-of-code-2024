@@ -3,6 +3,7 @@
 namespace App\Entity\Year2022\Day12;
 
 use App\Entity\PathFinding\AbstractTerrainCost;
+use App\Entity\PathFinding\PositionInterface;
 
 class TerrainCost extends AbstractTerrainCost
 {
@@ -11,7 +12,7 @@ class TerrainCost extends AbstractTerrainCost
         parent::__construct($this->positions);
     }
 
-    public function canMoveTo(Position $from, Position $to): bool
+    public function canMoveTo(PositionInterface $from, PositionInterface $to): bool
     {
         /**
          * To avoid needing to get out your climbing gear, the elevation of
@@ -21,6 +22,8 @@ class TerrainCost extends AbstractTerrainCost
          * that the elevation of the destination square can be much lower than
          * the elevation of your current square.)
          */
+        /** @var Position $to */
+        /** @var Position $from */
         return ($to->elevation - 1) === $from->elevation || $to->elevation <= $from->elevation;
     }
 }
