@@ -12,13 +12,6 @@ use App\Service\CompassHelper;
 // /// Day 4: Ceres Search ///
 class Day04ConundrumSolver extends AbstractConundrumSolver
 {
-    private const array OPPOSITE_DIRECTIONS = [
-        'NW' => 'SE',
-        'SW' => 'NE',
-        'SE' => 'NW',
-        'NE' => 'SW',
-    ];
-
     private DomainLogic $domainLogic;
     private array $xPositions;
     private array $aPositions;
