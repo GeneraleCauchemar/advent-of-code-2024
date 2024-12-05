@@ -83,7 +83,7 @@ class Day05ConundrumSolver extends AbstractConundrumSolver
 
     private function pagesAreInTheRightOrder(int $a, int $b): bool
     {
-        return !\in_array([$a, $b], $this->pageOrderingRules, true);
+        return \in_array([$a, $b], $this->pageOrderingRules, true);
     }
 
     private function reorderUpdatePages(array &$update): void
