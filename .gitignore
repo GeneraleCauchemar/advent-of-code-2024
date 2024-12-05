@@ -12,3 +12,19 @@
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+
+# Ignore doc
+Resources/doc/Year2019/**
+Resources/doc/Year2022/**
+Resources/doc/Year2023/**
+Resources/doc/Year2024/**
+
+# Ignore inputs
+Resources/input/Year2019/**
+!Resources/input/Year2019/test/
+Resources/input/Year2022/**
+!Resources/input/Year2022/test/
+Resources/input/Year2023/**
+!Resources/input/Year2023/test/
+Resources/input/Year2024/**
+!Resources/input/Year2024/test/
