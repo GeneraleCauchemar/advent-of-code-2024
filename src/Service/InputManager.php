@@ -7,7 +7,7 @@ use App\Exception\InputFileNotFoundException;
 
 class InputManager
 {
-    private const string INPUT_PATH_FORMAT = '%s/../../Resources/input/%s%s/%s%s.txt';
+    private const string INPUT_PATH_FORMAT = '%s/../Resources/input/%s%s/%s%s.txt';
 
     private bool $keepAsString;
     private string $separator;

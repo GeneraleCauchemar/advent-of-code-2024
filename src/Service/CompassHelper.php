@@ -78,4 +78,16 @@ class CompassHelper
             self::NORTH_EAST => self::SOUTH_WEST,
         };
     }
+
+    public static function getDirection90Degrees(string $from, bool $clockwise = true): string
+    {
+        $directions = [self::NORTH, self::EAST, self::SOUTH, self::WEST];
+        if (!$clockwise) {
+            $directions = array_reverse($directions);
+        }
+
+        $fromKey = array_search($from, $directions, true);
+
+        return $directions[$fromKey + 1] ?? $directions[0];
+    }
 }
