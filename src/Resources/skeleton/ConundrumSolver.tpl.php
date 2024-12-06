@@ -1,17 +1,15 @@
-<?php
+<?= "<?php\n" ?>
 
-declare(strict_types=1);
+namespace <?= $namespace; ?>;
 
-namespace App\ConundrumSolver\Year2024;
+<?= $use_statements; ?>
 
-use App\ConundrumSolver\AbstractConundrumSolver;
-
-// /// Day x: ... ///
-abstract class ExampleConundrumSolver extends AbstractConundrumSolver
+// /// Day <?= $day ?>: ... ///
+final class <?= $class_name; ?> extends AbstractConundrumSolver
 {
     public function __construct()
     {
-        parent::__construct('2024', '');
+        parent::__construct('<?= $year ?>', '<?= $day ?>');
     }
 
     ////////////////
