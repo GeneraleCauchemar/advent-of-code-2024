@@ -1,11 +1,12 @@
 <?= "<?php\n" ?>
 
-namespace <?= $namespace; ?>;
+namespace <?= $namespace ?>;
 
-<?= $use_statements; ?>
+<?= $use_statements ?>
 
-// /// Day <?= $day ?>: ... ///
-final class <?= $class_name; ?> extends AbstractConundrumSolver
+// ❄️ Day <?= (int) $day ?>: ... ❄️
+// @see <?= $see . PHP_EOL ?>
+final class <?= $class_name ?> extends AbstractConundrumSolver
 {
     public function __construct()
     {

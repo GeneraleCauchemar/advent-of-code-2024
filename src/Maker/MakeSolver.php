@@ -21,8 +21,10 @@ use Webmozart\Assert\Assert;
  */
 final class MakeSolver extends AbstractMaker
 {
-    public function __construct(#[Autowire('%kernel.project_dir%')] private readonly string $projectDir)
-    {
+    public function __construct(
+        #[Autowire('%kernel.project_dir%')] private readonly string $projectDir,
+        #[Autowire('%aoc_uri%')] private readonly string $aocBaseUri
+    ) {
     }
 
     public static function getCommandName(): string
@@ -37,7 +39,6 @@ final class MakeSolver extends AbstractMaker
 
     public function configureCommand(Command $command, InputConfiguration $inputConfig): void
     {
-        // TODO
         $command
             ->addArgument('year', InputArgument::REQUIRED, 'For which year?')
             ->addArgument('day', InputArgument::REQUIRED, 'And which day?')
@@ -72,11 +73,9 @@ final class MakeSolver extends AbstractMaker
                 'route_name'     => Str::asRouteName($classNameDetails->getRelativeNameWithoutSuffix()),
                 'year'           => $year,
                 'day'            => $day,
+                'see'            => \sprintf('%s%s/day/%s', $this->aocBaseUri, $year, (int) $day),
             ]
         );
-
-        fopen($this->projectDir . '/src/Resources/input/' . $yearFolder . '/test/' . $day . '.txt', 'xb');
-        fopen($this->projectDir . '/src/Resources/input/' . $yearFolder . '/' . $day . '.txt', 'xb');
 
         $generator->writeChanges();
         $this->writeSuccessMessage($io);

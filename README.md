@@ -23,10 +23,15 @@ as 2.
 ### How to jumpstart a new day
 
 ```shell
-$ symfony console make:solver
+$ (symfony) console make:solver
+$ (symfony) console app:grab-input <year> <day>
 ```
 
-This command will create a solver for specified day and year, as well as empty input and test input files.
+The first command will ask you to specify the year and day, and then create a solver accordingly.
+The second one will automatically grab the input for the specified date and put it in the file. You will still need to
+manually get and c/c the example input(s).
+**To automatically grab your input, the app needs to know your session ID. You will need to get it from your browser and
+set it in your `.env.local` file as the `AOC_SESSION_KEY` parameter. Beware not to commit it.**
 
 ### Misc
 
