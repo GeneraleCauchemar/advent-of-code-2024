@@ -15,8 +15,6 @@ final class Day07ConundrumSolver extends AbstractConundrumSolver
     ];
 
     private array $equations = [];
-    private array $partOneResults = [];
-    private array $partTwoResults = [];
 
     public function __construct()
     {
@@ -38,6 +36,7 @@ final class Day07ConundrumSolver extends AbstractConundrumSolver
 
     public function partOne(): string|int
     {
+        $result = [];
         $i = 1;
 
         /** @var Equation $equation */
@@ -51,11 +50,11 @@ final class Day07ConundrumSolver extends AbstractConundrumSolver
                     self::CALLBACKS[self::PART_ONE]
                 )
             )) {
-                $this->partOneResults[] = $equation->result;
+                $result[] = $equation->result;
             }
         }
 
-        return array_sum($this->partOneResults);
+        return array_sum($result);
     }
 
     /////////////////
@@ -64,6 +63,7 @@ final class Day07ConundrumSolver extends AbstractConundrumSolver
 
     public function partTwo(): string|int
     {
+        $result = [];
         $i = 1;
 
         /** @var Equation $equation */
@@ -77,11 +77,11 @@ final class Day07ConundrumSolver extends AbstractConundrumSolver
                     self::CALLBACKS[self::PART_TWO]
                 )
             )) {
-                $this->partTwoResults[] = $equation->result;
+                $result[] = $equation->result;
             }
         }
 
-        return array_sum($this->partTwoResults);
+        return array_sum($result);
     }
 
     /////////////////
