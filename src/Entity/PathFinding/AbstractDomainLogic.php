@@ -6,10 +6,11 @@ use JMGQ\AStar\DomainLogicInterface;
 
 abstract class AbstractDomainLogic implements DomainLogicInterface
 {
-    protected array $positions;
-
-    public function __construct(protected TerrainCostInterface $terrainCost)
-    {
+    public function __construct(
+        protected array $positions,
+        protected ?TerrainCostInterface $terrainCost = null,
+        protected bool $canMoveDiagonnally = false
+    ) {
     }
 
     public function getAdjacentNodes(mixed $node): iterable
@@ -21,13 +22,10 @@ abstract class AbstractDomainLogic implements DomainLogicInterface
         for ($row = $startingRow; $row <= $endingRow; $row++) {
             for ($column = $startingColumn; $column <= $endingColumn; $column++) {
                 // We can't move diagonally
-                if ($row === $node->row || $column === $node->column) {
+                if ($this->canMoveDiagonnally || ($row === $node->row || $column === $node->column)) {
                     $adjacentNode = $this->positions[$row][$column];
 
-                    if (
-                        $this->terrainCost->canMoveTo($node, $adjacentNode)
-                        && !$node->isEqualTo($adjacentNode)
-                    ) {
+                    if ($this->canMoveTo($node, $adjacentNode)) {
                         $adjacentNodes[] = $adjacentNode;
                     }
                 }
@@ -51,9 +49,9 @@ abstract class AbstractDomainLogic implements DomainLogicInterface
     {
         return [
             0 === $position->row ? 0 : $position->row - 1,
-            $this->terrainCost->getTotalRows() - 1 === $position->row ? $position->row : $position->row + 1,
+            $this->getTotalRows() - 1 === $position->row ? $position->row : $position->row + 1,
             0 === $position->column ? 0 : $position->column - 1,
-            $this->terrainCost->getTotalColumns() - 1 === $position->column ? $position->column : $position->column + 1,
+            $this->getTotalColumns() - 1 === $position->column ? $position->column : $position->column + 1,
         ];
     }
 
@@ -63,5 +61,21 @@ abstract class AbstractDomainLogic implements DomainLogicInterface
         $columnFactor = ($a->column - $b->column) ** 2;
 
         return sqrt($rowFactor + $columnFactor);
+    }
+
+    protected function canMoveTo(PositionInterface $node, PositionInterface $adjacentNode): bool
+    {
+        return $this->terrainCost->canMoveTo($node, $adjacentNode)
+            && !$node->isEqualTo($adjacentNode);
+    }
+
+    protected function getTotalRows(): int
+    {
+        return $this->terrainCost->getTotalRows();
+    }
+
+    protected function getTotalColumns(): int
+    {
+        return $this->terrainCost->getTotalColumns();
     }
 }

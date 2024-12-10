@@ -7,11 +7,9 @@ use App\Entity\PathFinding\TerrainCostInterface;
 
 class DomainLogic extends AbstractDomainLogic
 {
-    public function __construct(protected TerrainCostInterface $terrainCost)
+    public function __construct(protected ?TerrainCostInterface $terrainCost)
     {
-        parent::__construct($this->terrainCost);
-
-        $this->positions = $this->terrainCost->positions;
+        parent::__construct($this->terrainCost->positions, terrainCost: $this->terrainCost);
     }
 
     #[\Override]

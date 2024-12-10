@@ -12,11 +12,9 @@ class DomainLogic extends AbstractDomainLogic
     public array $lowestPositions;
     public Position $end;
 
-    public function __construct(protected TerrainCostInterface $terrainCost)
+    public function __construct(protected ?TerrainCostInterface $terrainCost)
     {
-        parent::__construct($this->terrainCost);
-
-        $this->positions = $this->terrainCost->positions;
+        parent::__construct($this->terrainCost->positions, $this->terrainCost);
 
         $this->determineLowestPositionsAndEndPoint();
     }
