@@ -2,7 +2,7 @@
 
 namespace App\Entity\Year2024\Day12;
 
-use App\Entity\LinearAlgebra\Vector2D;
+use App\Entity\Vector2D;
 
 class Plot implements \Stringable
 {

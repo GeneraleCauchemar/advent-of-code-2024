@@ -3,7 +3,7 @@
 namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
-use App\Entity\LinearAlgebra\Vector2D;
+use App\Entity\Vector2D;
 use App\Entity\Year2024\Day12\Angle;
 use App\Entity\Year2024\Day12\Plot;
 use App\Entity\Year2024\Day12\Region;

@@ -2,7 +2,7 @@
 
 namespace App\Enum;
 
-use App\Entity\LinearAlgebra\Vector2D;
+use App\Entity\Vector2D;
 
 enum Direction
 {

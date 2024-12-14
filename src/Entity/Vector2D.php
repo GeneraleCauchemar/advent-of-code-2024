@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\LinearAlgebra;
+namespace App\Entity;
 
 class Vector2D
 {
@@ -29,7 +29,7 @@ class Vector2D
     {
         return new Vector2D($this->x * $a, $this->y * $a);
     }
-    
+
     public function scalarProduct(Vector2D $v): float|int
     {
         return $this->x * $v->x + $this->y * $v->y;
