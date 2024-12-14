@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Enum;
+
+use App\Entity\LinearAlgebra\Vector2D;
+
+enum Direction
+{
+    case North;
+    case East;
+    case South;
+    case West;
+
+    public function getVector(): Vector2D
+    {
+        return match ($this) {
+            self::North => new Vector2D(0, -1),
+            self::East => new Vector2D(1, 0),
+            self::South => new Vector2D(0, 1),
+            self::West => new Vector2D(-1, 0),
+        };
+    }
+}
