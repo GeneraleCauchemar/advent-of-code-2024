@@ -41,6 +41,9 @@ set it in your `.env.local` file as the `AOC_SESSION_KEY` parameter. Beware not 
   constructor call, or else the `SolverHandler` service will not be able to find it when attempting to use it
 - Implement your logic in both `partOne()` and `partTwo()` and have them return your result
 - You can override `warmup()` to warmup class properties, manage input for both parts...
+- The `AbstractConundrumSolver` provides a `waitForNextStep()` method, that can be used to pause execution and
+  facilitate debugging. Typing on any key (I'm partial to `Enter` myself) will unpause the script until the next
+  iteration. If you need to stop execution completely when in debug mode, just `Ctrl + C` and `Ctrl + D`.
 
 ### Displaying the results
 

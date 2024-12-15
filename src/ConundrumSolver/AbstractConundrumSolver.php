@@ -117,6 +117,14 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
         }
     }
 
+    protected function waitForNextStep(): void
+    {
+        echo 'Continue?';
+        $handle = fopen ('php://stdin', 'rb');
+        fgets($handle);
+        fclose($handle);
+    }
+
     /**
      * @throws InputFileNotFoundException
      */
