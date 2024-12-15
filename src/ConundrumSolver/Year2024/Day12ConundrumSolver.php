@@ -60,7 +60,7 @@ final class Day12ConundrumSolver extends AbstractConundrumSolver
 
     public function partTwo(): string|int
     {
-        if ($this->isTestMode()) {
+        if ($this->testMode) {
             $this->resetMaps(true);
         }
 

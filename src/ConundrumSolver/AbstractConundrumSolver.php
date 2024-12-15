@@ -13,11 +13,16 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
     public const int PART_ONE = 1;
     public const int PART_TWO = 2;
     protected const string UNDETERMINED = 'to be determined';
+    protected const string NOT_TESTABLE = 'not testable';
 
-    private bool $testMode = false;
+    protected bool $testMode = false {
+        get {
+            return $this->testMode;
+        }
+    }
     private array|string $input;
     private array $testInputs;
-    protected ?float $executionTime = null;
+    private ?float $executionTime = null;
     private InputManager $inputManager;
 
     public function __construct(
@@ -91,14 +96,9 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
             : null;
     }
 
-    protected function isTestMode(): bool
-    {
-        return $this->testMode;
-    }
-
     protected function getInput(int $part = self::PART_ONE): array|string
     {
-        return $this->isTestMode() ? $this->getTestInput($part) : $this->input;
+        return $this->testMode ? $this->getTestInput($part) : $this->input;
     }
 
     protected function getTestInput(int $part = self::PART_ONE)
@@ -130,7 +130,7 @@ abstract class AbstractConundrumSolver implements ConundrumSolverInterface
      */
     private function init(): void
     {
-        $this->isTestMode() ? $this->initTestInputs() : $this->initInput();
+        $this->testMode ? $this->initTestInputs() : $this->initInput();
     }
 
     /**

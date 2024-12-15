@@ -23,7 +23,7 @@ class Day08ConundrumSolver extends AbstractConundrumSolver
     #[\Override]
     public function warmup(): void
     {
-        if (!$this->isTestMode()) {
+        if (!$this->testMode) {
             $this->initVariables();
         }
     }
@@ -35,7 +35,7 @@ class Day08ConundrumSolver extends AbstractConundrumSolver
     #[\Override]
     public function partOne(): string|int
     {
-        if ($this->isTestMode()) {
+        if ($this->testMode) {
             $this->initVariables();
         }
 
@@ -57,7 +57,7 @@ class Day08ConundrumSolver extends AbstractConundrumSolver
     #[\Override]
     public function partTwo(): string|int
     {
-        if ($this->isTestMode()) {
+        if ($this->testMode) {
             $this->initVariables(self::PART_TWO);
         }
 

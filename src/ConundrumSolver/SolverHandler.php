@@ -2,6 +2,7 @@
 
 namespace App\ConundrumSolver;
 
+use App\Archives\ArchivedConundrumSolverInterface;
 use App\Exception\SolverNotFoundException;
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
@@ -20,6 +21,10 @@ readonly class SolverHandler
     {
         /** @var ConundrumSolverInterface $solver */
         foreach ($this->conundrumSolvers as $solver) {
+            if ($solver instanceof ArchivedConundrumSolverInterface) {
+                continue;
+            }
+
             if ($solver->supports($year, $day)) {
                 return $solver;
             }

@@ -43,7 +43,7 @@ class Day03ConundrumSolver extends AbstractConundrumSolver
     public function partTwo(): string|int
     {
         // Two sets on test input
-        if ($this->isTestMode()) {
+        if ($this->testMode) {
             $this->prepareInstructions(true);
         }
 
