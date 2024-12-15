@@ -20,4 +20,9 @@ enum Direction
             self::West => new Vector2D(-1, 0),
         };
     }
+
+    public static function getDirectionFromVector(Vector2D $vector): ?Direction
+    {
+        return array_find(self::cases(), static fn($direction) => $direction->getVector() == $vector);
+    }
 }

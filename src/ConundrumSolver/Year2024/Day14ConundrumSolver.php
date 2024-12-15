@@ -98,6 +98,7 @@ final class Day14ConundrumSolver extends AbstractConundrumSolver
 
     public function partTwo(): string|int
     {
+        // TODO : chinese remainder theorem
         if ($this->isTestMode()) {
             return 'not testable';
         }
