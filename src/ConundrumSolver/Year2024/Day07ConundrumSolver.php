@@ -5,8 +5,11 @@ namespace App\ConundrumSolver\Year2024;
 use App\ConundrumSolver\AbstractConundrumSolver;
 use App\Entity\Year2024\Day07\Equation;
 
-// ❄️ Day 07: Bridge Repair ❄️
-// Depth-first search
+/**
+ * ❄️ Day 7: Bridge Repair ❄️
+ *
+ * @see https://adventofcode.com/2024/day/7
+ */
 final class Day07ConundrumSolver extends AbstractConundrumSolver
 {
     private const array CALLBACKS = [
@@ -46,7 +49,7 @@ final class Day07ConundrumSolver extends AbstractConundrumSolver
                 $i,
                 $equation->operands[0],
                 array_map(
-                    fn ($callback) => fn($a, $b) => $this->$callback($a, $b),
+                    fn($callback) => fn($a, $b) => $this->$callback($a, $b),
                     self::CALLBACKS[self::PART_ONE]
                 )
             )) {
@@ -73,7 +76,7 @@ final class Day07ConundrumSolver extends AbstractConundrumSolver
                 $i,
                 $equation->operands[0],
                 array_map(
-                    fn ($callback) => fn($a, $b) => $this->$callback($a, $b),
+                    fn($callback) => fn($a, $b) => $this->$callback($a, $b),
                     self::CALLBACKS[self::PART_TWO]
                 )
             )) {

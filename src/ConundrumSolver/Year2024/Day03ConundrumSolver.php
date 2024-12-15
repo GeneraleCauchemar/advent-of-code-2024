@@ -6,8 +6,12 @@ namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// /// Day 3: Mull It Over ///
-class Day03ConundrumSolver extends AbstractConundrumSolver
+/**
+ * ❄️ Day 3: Mull It Over ❄️
+ *
+ * @see https://adventofcode.com/2024/day/3
+ */
+final class Day03ConundrumSolver extends AbstractConundrumSolver
 {
     public function __construct()
     {

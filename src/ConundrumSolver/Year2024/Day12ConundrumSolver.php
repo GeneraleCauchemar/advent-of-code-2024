@@ -10,8 +10,11 @@ use App\Entity\Year2024\Day12\Region;
 use App\Enum\Direction;
 use App\Exception\OutsideOfGridException;
 
-// ❄️ Day 12: Garden Groups ❄️
-// @see https://adventofcode.com/2024/day/12
+/**
+ * ❄️ Day 12: Garden Groups ❄️
+ *
+ * @see https://adventofcode.com/2024/day/12
+ */
 final class Day12ConundrumSolver extends AbstractConundrumSolver
 {
     private array $angles;

@@ -6,8 +6,12 @@ namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// /// Day 5: Print Queue ///
-class Day05ConundrumSolver extends AbstractConundrumSolver
+/**
+ * ❄️ Day 5: Print Queue ❄️
+ *
+ * @see https://adventofcode.com/2024/day/7
+ */
+final class Day05ConundrumSolver extends AbstractConundrumSolver
 {
     private array $pageOrderingRules;
     private array $rulesByPage;

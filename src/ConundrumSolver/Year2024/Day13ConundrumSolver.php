@@ -5,8 +5,11 @@ namespace App\ConundrumSolver\Year2024;
 use App\ConundrumSolver\AbstractConundrumSolver;
 use App\Exception\UnwinnablePrizeException;
 
-// ❄️ Day 13: Claw Contraption ❄️
-// @see https://adventofcode.com/2024/day/13
+/**
+ * ❄️ Day 13: Claw Contraption ❄️
+ *
+ * @see https://adventofcode.com/2024/day/13
+ */
 final class Day13ConundrumSolver extends AbstractConundrumSolver
 {
     private const int A_PRICE = 3;

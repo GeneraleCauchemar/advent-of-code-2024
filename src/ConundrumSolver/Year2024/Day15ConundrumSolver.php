@@ -6,8 +6,11 @@ use App\ConundrumSolver\AbstractConundrumSolver;
 use App\Entity\Vector2D;
 use App\Enum\Direction;
 
-// ❄️ Day 15: Warehouse Woes ❄️
-// @see https://adventofcode.com/2024/day/15
+/**
+ * ❄️ Day 15: Warehouse Woes ❄️
+ *
+ * @see https://adventofcode.com/2024/day/15
+ */
 final class Day15ConundrumSolver extends AbstractConundrumSolver
 {
     private const string WALL = '#';

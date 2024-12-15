@@ -4,8 +4,11 @@ namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// ❄️ Day 9: Disk Fragmenter ❄️
-// @see https://adventofcode.com/2024/day/9
+/**
+ * ❄️ Day 9: Disk Fragmenter ❄️
+ *
+ * @see https://adventofcode.com/2024/day/9
+ */
 final class Day09ConundrumSolver extends AbstractConundrumSolver
 {
     private const string EMPTY = '.';
@@ -93,8 +96,8 @@ final class Day09ConundrumSolver extends AbstractConundrumSolver
         }
 
         $line = $files;
-        $emptySpaces = array_filter($files, static fn ($value) => self::EMPTY === $value[0]);
-        $files = array_filter($files, static fn ($value) => self::EMPTY !== $value[0]);
+        $emptySpaces = array_filter($files, static fn($value) => self::EMPTY === $value[0]);
+        $files = array_filter($files, static fn($value) => self::EMPTY !== $value[0]);
         $files = $this->reverse($files);
 
         foreach ($files as $index => $file) {

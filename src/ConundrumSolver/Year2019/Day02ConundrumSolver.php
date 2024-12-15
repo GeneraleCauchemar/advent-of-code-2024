@@ -8,7 +8,8 @@ use App\ConundrumSolver\AbstractConundrumSolver;
 
 /**
  * ❄️ Day 2: 1202 Program Alarm ❄️
- * @see https://adventofcode.com/2024/day/14
+ *
+ * @see https://adventofcode.com/2019/day/2
  */
 final class Day02ConundrumSolver extends AbstractConundrumSolver
 {
@@ -30,7 +31,7 @@ final class Day02ConundrumSolver extends AbstractConundrumSolver
 
     public function partOne(): string|int
     {
-        $program = array_map(static fn ($value) => (int) $value, explode(',', $this->getInput()[0]));
+        $program = array_map(static fn($value) => (int) $value, explode(',', $this->getInput()[0]));
 
         if (!$this->testMode) {
             $program[1] = 12;

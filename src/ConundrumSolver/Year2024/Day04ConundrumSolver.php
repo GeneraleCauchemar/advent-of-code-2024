@@ -9,8 +9,12 @@ use App\Entity\Year2024\Day04\DomainLogic;
 use App\Entity\Year2024\Day04\Position;
 use App\Service\CompassHelper;
 
-// /// Day 4: Ceres Search ///
-class Day04ConundrumSolver extends AbstractConundrumSolver
+/**
+ * ❄️ Day 4: Ceres Search ❄️
+ *
+ * @see https://adventofcode.com/2024/day/7
+ */
+final class Day04ConundrumSolver extends AbstractConundrumSolver
 {
     private DomainLogic $domainLogic;
     private array $xPositions;

@@ -12,17 +12,19 @@ use App\Entity\Year2024\Day06\Position;
 use App\Exception\InfiniteLoopException;
 use App\Service\CompassHelper;
 
-// /// Day 6: Guard Gallivant ///
-
 /**
- * Axes d'amélioration :
- * - nombres complexes ?
- * - éviter d'utiliser des objets ?
- * - bouger en ligne droite jusqu'à rencontrer un obstacle
- *   et éviter de vérifier à chaque point ? si deux lignes
- *   qui vont dans la même direction se chevauchent, boucle
+ * ❄️ Day 6: Guard Gallivant ❄️
+ *
+ * @see https://adventofcode.com/2024/day/6
+ *
+ *  Axes d'amélioration :
+ *  - nombres complexes ?
+ *  - éviter d'utiliser des objets ?
+ *  - bouger en ligne droite jusqu'à rencontrer un obstacle
+ *    et éviter de vérifier à chaque point ? si deux lignes
+ *    qui vont dans la même direction se chevauchent, boucle
  */
-class Day06ConundrumSolver extends AbstractConundrumSolver
+final class Day06ConundrumSolver extends AbstractConundrumSolver
 {
     private array $map;
     private array $obstacles;

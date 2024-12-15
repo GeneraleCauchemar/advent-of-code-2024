@@ -6,8 +6,12 @@ namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// /// Day 2: Red-Nosed Reports ///
-class Day02ConundrumSolver extends AbstractConundrumSolver
+/**
+ * ❄️ Day 2: Red-Nosed Reports ❄️
+ *
+ * @see https://adventofcode.com/2024/day/2
+ */
+final class Day02ConundrumSolver extends AbstractConundrumSolver
 {
     public function __construct()
     {

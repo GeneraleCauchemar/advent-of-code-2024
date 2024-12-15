@@ -4,8 +4,10 @@ namespace <?= $namespace ?>;
 
 <?= $use_statements ?>
 
-// ❄️ Day <?= (int) $day ?>: ... ❄️
-// @see <?= $see . PHP_EOL ?>
+/**
+ * ❄️ Day <?= (int) $day ?>: ... ❄️
+ * @see <?= $see . PHP_EOL ?>
+ */
 final class <?= $class_name ?> extends AbstractConundrumSolver
 {
     public function __construct()

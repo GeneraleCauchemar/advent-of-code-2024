@@ -8,8 +8,11 @@ use App\Entity\Graph\OrientedGraph;
 use App\Entity\Year2024\Day11\Node;
 use App\Exception\NodeAlreadyInGraphException;
 
-// ❄️ Day 11: Plutonian Pebbles ❄️
-// @see https://adventofcode.com/2024/day/11
+/**
+ * ❄️ Day 11: Plutonian Pebbles ❄️
+ *
+ * @see https://adventofcode.com/2024/day/11
+ */
 final class Day11ConundrumSolver extends AbstractConundrumSolver
 {
     private array $stones = [];

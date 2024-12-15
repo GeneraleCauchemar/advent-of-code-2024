@@ -6,8 +6,11 @@ use App\ConundrumSolver\AbstractConundrumSolver;
 use App\Entity\Year2024\Day10\DomainLogic;
 use App\Entity\Year2024\Day10\Position;
 
-// ❄️ Day 10: Hoof It ❄️
-// @see https://adventofcode.com/2024/day/10
+/**
+ * ❄️ Day 10: Hoof It ❄️
+ *
+ * @see https://adventofcode.com/2024/day/10
+ */
 final class Day10ConundrumSolver extends AbstractConundrumSolver
 {
     private array $startingPoints = [];

@@ -4,8 +4,11 @@ namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// ❄️ Day 8: Resonant Collinearity ❄️
-// @see https://adventofcode.com/2024/day/8
+/**
+ * ❄️ Day 8: Resonant Collinearity ❄️
+ *
+ * @see https://adventofcode.com/2024/day/8
+ */
 final class Day08ConundrumSolver extends AbstractConundrumSolver
 {
     private int $minX = 0;

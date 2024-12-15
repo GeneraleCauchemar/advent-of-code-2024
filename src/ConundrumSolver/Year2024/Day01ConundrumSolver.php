@@ -6,8 +6,12 @@ namespace App\ConundrumSolver\Year2024;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// /// Day 1: Historian Hysteria ///
-class Day01ConundrumSolver extends AbstractConundrumSolver
+/**
+ * ❄️ Day 1: Historian Hysteria ❄️
+ *
+ * @see https://adventofcode.com/2024/day/1
+ */
+final class Day01ConundrumSolver extends AbstractConundrumSolver
 {
     private array $left = [];
     private array $right = [];

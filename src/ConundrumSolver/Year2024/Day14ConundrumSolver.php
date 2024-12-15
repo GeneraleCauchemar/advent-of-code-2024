@@ -7,8 +7,11 @@ use App\Entity\Grid;
 use App\Entity\Vector2D;
 use App\Entity\Year2024\Day14\Robot;
 
-// ❄️ Day 14: Restroom Redoubt ❄️
-// @see https://adventofcode.com/2024/day/14
+/**
+ * ❄️ Day 14: Restroom Redoubt ❄️
+ *
+ * @see https://adventofcode.com/2024/day/14
+ */
 final class Day14ConundrumSolver extends AbstractConundrumSolver
 {
     private const int TEST_GRID_WIDTH = 11;

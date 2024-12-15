@@ -6,8 +6,12 @@ namespace App\ConundrumSolver\Year2019;
 
 use App\ConundrumSolver\AbstractConundrumSolver;
 
-// /// Day 1: The Tyranny of the Rocket Equation ///
-class Day01ConundrumSolver extends AbstractConundrumSolver
+/**
+ * ❄️ Day 1: The Tyranny of the Rocket Equation ❄️
+ *
+ * @see https://adventofcode.com/2019/day/1
+ */
+final class Day01ConundrumSolver extends AbstractConundrumSolver
 {
     private array $fuelRequirements = [];
 
