@@ -11,18 +11,13 @@ use App\Entity\Year2024\Day14\Robot;
 // @see https://adventofcode.com/2024/day/14
 final class Day14ConundrumSolver extends AbstractConundrumSolver
 {
-    private const int SECONDS_PART_ONE = 100;
-    private const array TREE_PATTERN = [
-        '.*..............*..............*.',
-        '.*.............***.............*.',
-        '.*............*****............*.',
-        '.*...........*******...........*.',
-        '.*..........*********..........*.',
-    ];
+    private const int TEST_GRID_WIDTH = 11;
+    private const int TEST_GRID_HEIGHT = 7;
+    private const int GRID_WIDTH = 101;
+    private const int GRID_HEIGHT = 103;
 
     private array $robots = [];
     private Grid $grid;
-    private array $print = [];
 
     public function __construct()
     {
@@ -32,10 +27,10 @@ final class Day14ConundrumSolver extends AbstractConundrumSolver
     #[\Override]
     public function warmup(): void
     {
-        if ($this->isTestMode()) {
-            $grid = new Grid(10, 6);
+        if ($this->testMode) {
+            $grid = new Grid(self::TEST_GRID_WIDTH - 1, self::TEST_GRID_HEIGHT - 1);
         } else {
-            $grid = new Grid(100, 102);
+            $grid = new Grid(self::GRID_WIDTH - 1, self::GRID_HEIGHT - 1);
         }
 
         $this->grid = $grid;
@@ -61,27 +56,13 @@ final class Day14ConundrumSolver extends AbstractConundrumSolver
 
     public function partOne(): string|int
     {
-        for ($i = 0; $i < self::SECONDS_PART_ONE; $i++) {
-            foreach ($this->robots as $robot) {
-                $x = $robot->x + $robot->velocity->x;
-                $y = $robot->y + $robot->velocity->y;
-
-                if ($this->grid->isInside($x, $y)) {
-                    $robot->x = $x;
-                    $robot->y = $y;
-
-                    continue;
-                }
-
-                $this->teleport($x, $y, $robot);
-            }
-        }
-
         $quadrants = $this->getQuadrants();
         $result = array_fill_keys(['A', 'B', 'C', 'D'], 0);
-        foreach ($this->robots as $robot) {
+
+        $positions = $this->simulateRobotsPositions(100);
+        foreach ($positions as [$x, $y]) {
             foreach ($quadrants as $key => $quadrant) {
-                if ($quadrant->isInside($robot->x, $robot->y)) {
+                if ($quadrant->isInside($x, $y)) {
                     $result[$key]++;
 
                     continue 2;
@@ -96,67 +77,28 @@ final class Day14ConundrumSolver extends AbstractConundrumSolver
     // PART 2
     // //////////////
 
+    /**
+     * @see https://en.wikipedia.org/wiki/Chinese_remainder_theorem
+     */
     public function partTwo(): string|int
     {
-        // TODO : chinese remainder theorem
-        if ($this->isTestMode()) {
-            return 'not testable';
+        if ($this->testMode) {
+            return self::NOT_TESTABLE;
         }
 
-        for ($i = 1; $i <= 7850; $i++) {
-            $this->resetPrint();
+        // Determine at which time variance is at its lowest point for both X and Y
+        $bestX = $this->getMinTimeThroughMinVariance(range(0, self::GRID_WIDTH - 1), true);
+        $bestY = $this->getMinTimeThroughMinVariance(range(0, self::GRID_HEIGHT - 1), false);
 
-            foreach ($this->robots as $robot) {
-                $x = $robot->x + $robot->velocity->x;
-                $y = $robot->y + $robot->velocity->y;
+        // Get inverse of width % height
+        $inverse = (int) gmp_invert(self::GRID_WIDTH, self::GRID_HEIGHT);
 
-                if ($this->grid->isInside($x, $y)) {
-                    $this->move($x, $y, $robot, true);
-
-                    continue;
-                }
-
-                $this->teleport($x, $y, $robot, true);
-            }
-
-            if ($this->checkForCluster()) {
-                return self::SECONDS_PART_ONE + $i;
-            }
-        }
-
-        return parent::partTwo();
+        return $bestX + (($inverse * ($bestY - $bestX)) % self::GRID_HEIGHT) * self::GRID_WIDTH;
     }
 
     // //////////////
     // METHODS
     // //////////////
-
-    private function teleport(int $x, int $y, Robot $robot, bool $partTwo = false): void
-    {
-        $x = match (true) {
-            0 > $x => $this->grid->xMax + $x + 1,
-            $this->grid->xMax < $x => $x - $this->grid->xMax - 1,
-            default => $x
-        };
-
-        $y = match (true) {
-            0 > $y => $this->grid->yMax + $y + 1,
-            $this->grid->yMax < $y => $y - $this->grid->yMax - 1,
-            default => $y
-        };
-
-        $this->move($x, $y, $robot, $partTwo);
-    }
-
-    private function move(int $x, int $y, Robot $robot, bool $partTwo = false): void
-    {
-        $robot->x = $x;
-        $robot->y = $y;
-
-        if ($partTwo) {
-            $this->print[$y][$x] = '*';
-        }
-    }
 
     private function getQuadrants(): array
     {
@@ -173,50 +115,66 @@ final class Day14ConundrumSolver extends AbstractConundrumSolver
         ];
     }
 
-    private function resetPrint(): void
+    /**
+     * Simulate robots positions at time t, making sure
+     * we stay within bounds by using modulo of height
+     * and width and readjusting when values become
+     * negative
+     */
+    private function simulateRobotsPositions(int $t): array
     {
-        $this->print = array_fill_keys(range(0, $this->grid->yMax), []);
+        $robots = [];
+        $w = $this->testMode ? self::TEST_GRID_WIDTH : self::GRID_WIDTH;
+        $h = $this->testMode ? self::TEST_GRID_HEIGHT : self::GRID_HEIGHT;
 
-        foreach ($this->print as &$row) {
-            $row = array_fill_keys(range(0, $this->grid->xMax), '.');
+        foreach ($this->robots as $robot) {
+            $x = ($robot->x + $t * $robot->velocity->x) % $w;
+            $y = ($robot->y + $t * $robot->velocity->y) % $h;
+
+            $x += 0 > $x ? $w : 0;
+            $y += 0 > $y ? $h : 0;
+
+            $robots[] = [$x, $y];
         }
+
+        return $robots;
     }
 
-    private function checkForCluster(): bool
+    private function getMinTimeThroughMinVariance(array $timeRange, bool $forX): int
     {
-        foreach ($this->print as $y => $row) {
-            $row = implode('', $row);
-            $check = strpos($row, self::TREE_PATTERN[0]);
+        $minT = null;
+        $minVariance = PHP_INT_MAX;
 
-            if ((false !== $check) && $this->scanForTree($y, $check, 1)) {
-                return true;
+        foreach ($timeRange as $t) {
+            $variance = $this->getMinVarianceForTime($t, $forX);
+
+            if ($minVariance > $variance) {
+                $minVariance = $variance;
+                $minT = $t;
             }
         }
 
-        return false;
+        return $minT;
     }
 
-    private function scanForTree(int $y, int $check, int $i): bool
+    private function getMinVarianceForTime(int $t, bool $forX): float|int
     {
-        $row = implode('', $this->print[$y + 1] ?? []);
-        $nextCheck = strpos($row, self::TREE_PATTERN[$i]);
+        $positions = $this->simulateRobotsPositions($t);
 
-        if ($check === $nextCheck) {
-            if (3 === $i) {
-                return true;
-            }
-
-            return $this->scanForTree($y + 1, $nextCheck, $i + 1);
-        }
-
-        return false;
+        return $this->getVariance(array_column($positions, $forX ? 0 : 1));
     }
 
-    private function printTree(): void
+    /**
+     * Getting the average squared deviation
+     * from the mean
+     */
+    private function getVariance(array $values): int|float
     {
-        for ($y = 0; $y < $this->grid->yMax; $y++) {
-            print implode('', $this->print[$y]);
-            echo PHP_EOL;
-        }
+        $meanValue = array_sum($values) / \count($values);
+        $squaredDifferences = array_map(static function ($value) use ($meanValue) {
+            return ($value - $meanValue) ** 2;
+        }, $values);
+
+        return array_sum($squaredDifferences) / \count($squaredDifferences);
     }
 }
